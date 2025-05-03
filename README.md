@@ -2,6 +2,8 @@
 
 I made this script because i wanted some sort of cool display for r/unixporn... Tbh tho this looks cooler than what i expected...
 
+From how I've coded it, it might work as a polybar module, just colorless. But I've been unable to test it as i don't have access to my linux machine. If you're a polybar user, please do try it and tell me if it works.
+
 The reason its called `heart_attack.py` is because if you run it in fullscreen in a real tty, it would look like the desktop is having a heart attack.
 
 also this is the very first script i properly commented...
