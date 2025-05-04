@@ -22,8 +22,8 @@ python3 heart_attack.py
 Run it in a real tty to see colors...
 
 ## Screenshots
-![Preview](assets/screenshots/screenshot1.png)
-![Preview](assets/screenshots/screenshot2.png)
-![Preview](assets/screenshots/screenshot3.png)
-![Preview](assets/screenshots/screenshot4.png)
-![Preview](assets/screenshots/screenshot5.png)
+![Preview](screenshots/screenshot1.png)
+![Preview](screenshots/screenshot2.png)
+![Preview](screenshots/screenshot3.png)
+![Preview](screenshots/screenshot4.png)
+![Preview](screenshots/screenshot5.png)
