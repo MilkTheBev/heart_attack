@@ -17,7 +17,7 @@ x = True        # Will be used for looping
 opr = " + "
 try:
     cols = os.get_terminal_size().columns       # Defines the number of columns
-    ttymode = True 
+    ttymode = True
 except OSError:
     cols = 80           # If not a tty, 80 is assumed to be the number of columns
     ttymode = False
@@ -52,6 +52,10 @@ fcolor = [
 
 bcolorm = ""        # Background color selected from bcolor, right now empty, will remain empty if ttymode == False
 fcolorm = ""        # Background color selected from fcolor, right now empty, will remain empty if ttymode == False
+if ttymode:
+    endchar = "\n"
+elif not ttymode:
+    endchar = "\r"
 
 if os.name == "nt":
     os.system("cls")
@@ -68,7 +72,7 @@ try:
         lin = ftxtm * num                                           # Multiplies the selected foreground character with the number...
         gap = btxtm * ((cols - len(lin)) // 2)                      # Centers lin and fills the extra space with the background character
         gap2 = gap + (btxtm * (cols - len(gap + lin + gap)))                    # If any space still remains, fills it up with the background character
-        print(bcolorm + gap + fcolorm + lin + bcolorm + gap2)       # Prints the output and colors as necessary
+        print(bcolorm + gap + fcolorm + lin + bcolorm + gap2, end=endchar)       # Prints the output and colors as necessary
         lins.append(gap + lin + gap2)
         time.sleep(0.0625)      # Waits 1/16th of a second
         if num == cols:
