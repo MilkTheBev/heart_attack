@@ -10,15 +10,15 @@ A nice little tty screensaver made in python
 
 '''''''''''''''''''''''''''
 
-import os, time, random
+import os, time, random, sys
 
 
 x = True        # Will be used for looping
 opr = " + "
-try:
+if os.isatty(1):
     cols = os.get_terminal_size().columns       # Defines the number of columns
     ttymode = True
-except OSError:
+elif not os.isatty(1):
     cols = 80           # If not a tty, 80 is assumed to be the number of columns
     ttymode = False
 if cols % 2 == 0:
