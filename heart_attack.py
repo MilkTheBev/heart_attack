@@ -82,7 +82,7 @@ try:
             # n = 4
             cbn = random.randint(0, (len(bcolor) - 1))      # Changes background character color
             cfn = random.randint(0, (len(fcolor) - 1))      # Changes foreground character color
-            opr = " + "         # Changes operation to addition if the number of 
+            opr = " + "         # Changes operation to addition if the number of foreground characters are the lowest that they can be...
             btxtm = btxt[n]
             ftxtm = ftxt[n]     # Applies changed characters
             if ttymode:
@@ -99,7 +99,7 @@ except KeyboardInterrupt:                                           # Executes w
         if txt_confirm == "y":
             with open("output.txt", "wt") as f:
                 f.write("")
-                f.close()       # Creates a file output.txt with nothing written because i DOUBT that there even is another file with the same name... if it gets overwritten, not my problem.. womp womp
+                f.close()       # Creates a file output.txt with nothing written...
             with open("output.txt", "at") as f:
                 if len(lins) < 1000:
                     for i in range(0, (len(lins) - 1)):
