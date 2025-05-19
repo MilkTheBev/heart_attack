@@ -15,10 +15,10 @@ import os, time, random
 
 x = True        # Will be used for looping
 opr = " + "
-if os.isatty(1):
+try:
     cols = os.get_terminal_size().columns       # Defines the number of columns
     ttymode = True
-elif not os.isatty(1):
+except:
     cols = 80           # If not a tty, 80 is assumed to be the number of columns
     ttymode = False
 if cols % 2 == 0:
