@@ -1,4 +1,4 @@
-'''''''''''''''''''''''''''
+'''
 
 
 heart_attack.py
@@ -8,7 +8,7 @@ as it is actually called...
 A nice little tty screensaver made in python
 
 
-'''''''''''''''''''''''''''
+'''
 
 import os, time, random
 
