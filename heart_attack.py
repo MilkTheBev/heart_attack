@@ -48,7 +48,7 @@ fcolor = [
 
 
 bcolorm = ""        # Background color selected from bcolor, right now empty, will remain empty if ttymode == False
-fcolorm = ""        # Background color selected from fcolor, right now empty, will remain empty if ttymode == False
+fcolorm = ""        # Foreground color selected from fcolor, right now empty, will remain empty if ttymode == False
 
 if os.name == "nt":
     os.system("cls")
