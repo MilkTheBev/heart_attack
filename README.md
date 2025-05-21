@@ -23,9 +23,12 @@ exec = /path/to/where/you/cloned/heart_attack.py
 tail = true
 ```
 
+you wont be able to save the output as a txt file.. cuz youre running it as a polybar module
+
 ## Screenshots
 ![Preview](screenshots/screenshot1.png)
 ![Preview](screenshots/screenshot2.png)
 ![Preview](screenshots/screenshot3.png)
 ![Preview](screenshots/screenshot4.png)
 ![Preview](screenshots/screenshot5.png)
+these were taken on windows cuz i didnt have a linux machine.
