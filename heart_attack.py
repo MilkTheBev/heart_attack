@@ -56,6 +56,10 @@ else:
     os.system("clear")      # Detects the os environment its running on and clears the screen
 
 lins = []                   # Will store the lines the program prints without color...
+modes = ["ascending", "random (trust me its very ugly)"]
+for i in range(0, len(modes)):
+    print(str(i + 1) + ". " + modes[i])
+mode = input("Choose mode: ")
 
 try:
     if ttymode:
@@ -84,7 +88,10 @@ try:
             elif not ttymode:
                 bcolorm = ""
                 fcolorm = ""
-        exec("num = num" + opr + "2")       # Controls the number of forground characters, further controlled by the operator variable opr
+        if mode == "2":
+            num = random.randint(num2, cols)
+        elif mode == "1":
+            exec("num = num" + opr + "2")       # Controls the number of forground characters, further controlled by the operator variable opr
 except KeyboardInterrupt:                                           # Executes when Ctrl+C is pressed at anytime
     if ttymode:
         print("\033[0m")
