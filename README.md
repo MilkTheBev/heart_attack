@@ -6,6 +6,8 @@ The reason its called `heart_attack.py` is because if you run it in fullscreen i
 
 also this is the very first script i properly commented...
 
+**IMPORTANT**: If you are sensitive to flashing lights. Either refrain from using this, or go to line 17 and set the `ttymode` variable to `False`.
+
 If you have any suggestions, feel free to tell me. Or if you wanna make it better or wilder, fork it... I'm not stopping you.
 
 ## Usage
