@@ -73,6 +73,28 @@ if ttymode:
 elif not ttymode:
     mode = "ascending"
 
+if mode == "ascending":
+    boolascending = True
+    boolrandom = False
+    booldescending = False
+    boolgay = False
+elif mode == "random":
+    boolascending = False
+    boolrandom = True
+    booldescending = False
+    boolgay = False
+elif mode == "descending":
+    boolascending = False
+    boolrandom = False
+    booldescending = True
+    boolgay = False
+    num = cols
+elif mode == "gay":
+    boolascending = False
+    boolrandom = False
+    booldescending = False
+    boolgay = True
+
 try:
     if ttymode:
         print("Press Ctrl+C to quit.\n\n")
@@ -83,7 +105,7 @@ try:
         gap2 = gap + (btxtm * (cols - len(gap + lin + gap)))                            # If any space still remains, fills it up with the background character
         print(bcolorm + gap + fcolorm + lin + bcolorm + gap2)                           # Prints the output and colors as necessary
         lins.append(gap + lin + gap2)
-        if mode == "ascending":
+        if boolascending:
             time.sleep(0.0625)                                                          # Waits 1/16th of a second
             if num == cols:
                 opr = " - "                                                             # If the number of foreground characters is the same as the number of columns, operation becomes subtraction
@@ -96,26 +118,31 @@ try:
                 ftxtm = ftxt[n]                                                         # Applies changed characters
                 if ttymode:
                     bcolorm = bcolor[cbn]
-                    fcolorm = fcolor[cfn]                                               # Applies changed colors
+                    fcolorm = fcolor[cfn]                                               # Applies changed colors... also, the reason these 2 lines arent in an if condition in other modes is because if ttymode is False, then this script defaults to ascending mode.
                 elif not ttymode:
                     bcolorm = ""
                     fcolorm = ""
             exec("num = num" + opr + "2")                                               # Controls the number of forground characters, further controlled by the operator variable opr
-        elif mode == "random":
+        elif boolrandom:
             time.sleep(random.randint(0, 1000) / 10000)                                 # Waits for a random interval between 0 and half a second
-            n = random.randint(0, (len(btxt) - 1))                                      # Much of this stuff has been explained in the previous block.... aka. up there ^^^^^^ (lines 75 to 91)
+            n = random.randint(0, (len(btxt) - 1))
             cbn = random.randint(0, (len(bcolor) - 1))
             cfn = random.randint(0, (len(fcolor) - 1))
             btxtm = btxt[n]
             ftxtm = ftxt[n]
-            if ttymode:
-                bcolorm = bcolor[cbn]
-                fcolorm = fcolor[cfn]
-            elif not ttymode:
-                bcolorm = ""
-                fcolorm = ""
-            num = random.randint(num2, cols)
-        elif mode == "descending":
+            bcolorm = bcolor[cbn]
+            fcolorm = fcolor[cfn]
+            if num2 == 1:                                                               # If the least number of foreground characters possible is 1, then it will make sure that the number of foreground characters generated is an odd number
+                num = random.randint(num2, cols)
+                if num % 2 == 0:
+                    while num % 2 == 0:
+                        num = random.randint(num2, cols)
+            elif num2 == 2:                                                             # If the least number of foreground characters possible is 2, then it will make sure that the number of foreground characters generated is an even number
+                num = random.randint(num2, cols)
+                if num % 2 != 0:
+                    while num % 2 != 0:
+                        num = random.randint(num2, cols)
+        elif booldescending:                                                            # No explanation needed... just like the first mode, but reversed...
             time.sleep(0.0625)
             if num == num2:
                 opr = " + "
@@ -126,27 +153,23 @@ try:
                 opr = " - "
                 btxtm = btxt[n]
                 ftxtm = ftxt[n]
-                if ttymode:
-                    bcolorm = bcolor[cbn]
-                    fcolorm = fcolor[cfn]
-                elif not ttymode:
-                    bcolorm = ""
-                    fcolorm = ""
+                bcolorm = bcolor[cbn]
+                fcolorm = fcolor[cfn]
             exec("num = num" + opr + "2")
-        elif mode == "gay":                                                         # Its not like others... so do read...
+        elif boolgay:                                                               # Its not like others... so do read...
             time.sleep(0.0625)
-            n = 4                                                                   # The foreground and background charscter is fixed to the 5th one (ik it says 4, but indexing works differently)
-            cbn = cbn + 1                                                           # Moves up the color list... here, bcolor
-            if cbn == (len(bcolor) - 1):
-                cbn = 0                                                             # If the color list (bcolor) has ended, then revert back to the start of the list... and ik it says 0, but again, indexing works differently
-            cfn = cfn + 1
-            if cfn == (len(fcolor) - 1):
-                cfn = 0
+            n = 4                                                                   # The foreground and background character is fixed to the 5th one (ik it says 4, but indexing works differently)
+            if cbn == 0 and cfn == 0:
+                opr = " + "
+            elif cbn == (len(bcolor) - 1) and cfn == (len(fcolor) - 1):
+                opr = " - "                                                         # The same operator switch I used in the ascending block...
+            exec("cbn = cbn" + opr + "1")
+            exec("cfn = cfn" + opr + "1")
             btxtm = btxt[n]
             ftxtm = ftxt[n]
-            bcolorm = bcolor[cbn]                                                   # Ik that this line, and the line after this, in the other 3 modes was put in an if condition that would execute if it was running in a tty... but if it had the if condition, the colors would go away... and the colors in this mode is what makes it different...
+            bcolorm = bcolor[cbn]
             fcolorm = fcolor[cfn]
-            num = cols
+            num = cols                                                              # Locks the number of foreground characters to the width of the tty.
 except KeyboardInterrupt:                                                           # Executes when Ctrl+C is pressed at anytime
     if ttymode:
         print("\033[0m")
