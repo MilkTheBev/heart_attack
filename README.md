@@ -27,10 +27,15 @@ tail = true
 
 you wont be able to save the output as a txt file.. cuz youre running it as a polybar module
 
-## Screenshots
-![Preview](screenshots/screenshot1.png)
-![Preview](screenshots/screenshot2.png)
-![Preview](screenshots/screenshot3.png)
-![Preview](screenshots/screenshot4.png)
-![Preview](screenshots/screenshot5.png)
-these were taken on windows cuz i didnt have a linux machine.
+## Modes
+### 1. `ascending` mode
+![Preview](gifs/ascending.gif)
+
+### 2. `random` mode
+![Preview](gifs/random.gif)
+
+### 3. `descending` mode
+![Preview](gifs/descending.gif)
+
+### 4. `gay` mode
+![Preview](gifs/gay.gif)
