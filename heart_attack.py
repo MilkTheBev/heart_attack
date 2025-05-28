@@ -14,7 +14,7 @@ x = True                                                                        
 opr = " + "
 if sys.stdout.isatty():
     cols = os.get_terminal_size().columns                                           # Defines the number of columns
-    ttymode = True
+    ttymode = True                                                                  # If you are sensitive to flashing images, please set this flag to False... it disables color... and defaults to 'ascending' mode
 else:
     cols = 80                                                                       # If not a tty, 80 is assumed to be the number of columns
     ttymode = False
@@ -25,8 +25,8 @@ elif cols % 2 != 0:
 num = num2
 btxt = ["·", "=", "-", "0", "░"]                                                    # Character list that will print as background
 ftxt = ["•", "#", "—", "1", "▓"]                                                    # Character list that will print as foreground
-btxtm = ""                                                                          # A character selected from btxt, right now an empty string
-ftxtm = ""                                                                          # A character selected from ftxt, right now an empty string
+btxtm = "*"                                                                         # A character selected from btxt, right now an empty string
+ftxtm = "*"                                                                         # A character selected from ftxt, right now an empty string
 bcolor = [
         "\033[31m", # Red
         "\033[32m", # Green
@@ -43,7 +43,8 @@ fcolor = [
         "\033[95m", # Bright purple
         "\033[96m", # Bright cyan
 ]
-
+cbn = 0                                                                             # Predefining the background color index
+cfn = 0                                                                             # Predefining the foreground color index
 
 # ^^ The color list used for coloring ^^
 
@@ -56,10 +57,21 @@ else:
     os.system("clear")                                                              # Detects the os environment its running on and clears the screen
 
 lins = []                                                                           # Will store the lines the program prints without color...
-modes = ["ascending", "random"]                                                     # The different modes this shit can operate on
+modes = [
+        "ascending",    # The first one i coded... increases the number of foreground characters until it reaches the maximum width it can, from which it begins to shrink... when it fully shrinks, a new pattern begins.
+        "random",       # aka. chaos... everything is randomized after each line.... time interval, random... colors, random... characters, random...
+        "descending",   # Just like the first one, but reversed... may take time....
+        "gay"           # ik a bit offensive.... im sorry... it basically outputs a rainbow... each line colored differently...
+]
+
+# ^^ The different modes in which it can output ^^
+
 for i in range(0, len(modes)):
     print(str(i + 1) + ". " + modes[i])
-mode = modes[int(input("Choose mode (for example, type '1' for 'ascending' mode): ")) - 1] # Prompts the user to choose the mode... and this wont loop. So run the script again to switch mode
+if ttymode:
+    mode = modes[int(input("Choose mode (for example, type '1' for 'ascending' mode): ")) - 1] # Prompts the user to choose the mode... and this wont loop. So run the script again to switch mode
+elif not ttymode:
+    mode = "ascending"
 
 try:
     if ttymode:
@@ -71,13 +83,12 @@ try:
         gap2 = gap + (btxtm * (cols - len(gap + lin + gap)))                            # If any space still remains, fills it up with the background character
         print(bcolorm + gap + fcolorm + lin + bcolorm + gap2)                           # Prints the output and colors as necessary
         lins.append(gap + lin + gap2)
-        time.sleep(0.0625)                                                              # Waits 1/16th of a second
         if mode == "ascending":
+            time.sleep(0.0625)                                                          # Waits 1/16th of a second
             if num == cols:
                 opr = " - "                                                             # If the number of foreground characters is the same as the number of columns, operation becomes subtraction
             elif num == num2:
                 n = random.randint(0, (len(btxt) - 1))                                  # Changes the foreground and background characters
-                # n = 4
                 cbn = random.randint(0, (len(bcolor) - 1))                              # Changes background character color
                 cfn = random.randint(0, (len(fcolor) - 1))                              # Changes foreground character color
                 opr = " + "                                                             # Changes operation to addition if the number of foreground characters are the lowest that they can be...
@@ -90,15 +101,52 @@ try:
                     bcolorm = ""
                     fcolorm = ""
             exec("num = num" + opr + "2")                                               # Controls the number of forground characters, further controlled by the operator variable opr
-        if mode == "random":
-            n = random.randint(0, (len(btxt) - 1))
+        elif mode == "random":
+            time.sleep(random.randint(0, 1000) / 10000)                                    # Waits for a random interval between 0 and half a second
+            n = random.randint(0, (len(btxt) - 1))                                      # Much of this stuff has been explained in the previous block.... aka. up there ^^^^^^ (lines 75 to 91)
             cbn = random.randint(0, (len(bcolor) - 1))
             cfn = random.randint(0, (len(fcolor) - 1))
             btxtm = btxt[n]
             ftxtm = ftxt[n]
+            if ttymode:
+                bcolorm = bcolor[cbn]
+                fcolorm = fcolor[cfn]
+            elif not ttymode:
+                bcolorm = ""
+                fcolorm = ""
+            num = random.randint(num2, cols)
+        elif mode == "descending":
+            time.sleep(0.0625)
+            if num == num2:
+                opr = " + "
+            elif num == cols:
+                n = random.randint(0, (len(btxt) - 1))
+                cbn = random.randint(0, (len(bcolor) - 1))
+                cfn = random.randint(0, (len(fcolor) - 1))
+                opr = " - "
+                btxtm = btxt[n]
+                ftxtm = ftxt[n]
+                if ttymode:
+                    bcolorm = bcolor[cbn]
+                    fcolorm = fcolor[cfn]
+                elif not ttymode:
+                    bcolorm = ""
+                    fcolorm = ""
+            exec("num = num" + opr + "2")
+        elif mode == "gay":                                                         # Its not like others... so do read...
+            time.sleep(0.0625)
+            n = 4
+            cbn = cbn + 1
+            if cbn == (len(bcolor) - 1):
+                cbn = 0
+            cfn = cfn + 1
+            if cfn == (len(fcolor) - 1):
+                cfn = 0
+            btxtm = btxt[n]
+            ftxtm = ftxt[n]
             bcolorm = bcolor[cbn]
             fcolorm = fcolor[cfn]
-            num = random.randint(num2, cols)
+            num = cols
 except KeyboardInterrupt:                                                           # Executes when Ctrl+C is pressed at anytime
     if ttymode:
         print("\033[0m")
