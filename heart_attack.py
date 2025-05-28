@@ -102,7 +102,7 @@ try:
                     fcolorm = ""
             exec("num = num" + opr + "2")                                               # Controls the number of forground characters, further controlled by the operator variable opr
         elif mode == "random":
-            time.sleep(random.randint(0, 1000) / 10000)                                    # Waits for a random interval between 0 and half a second
+            time.sleep(random.randint(0, 1000) / 10000)                                 # Waits for a random interval between 0 and half a second
             n = random.randint(0, (len(btxt) - 1))                                      # Much of this stuff has been explained in the previous block.... aka. up there ^^^^^^ (lines 75 to 91)
             cbn = random.randint(0, (len(bcolor) - 1))
             cfn = random.randint(0, (len(fcolor) - 1))
@@ -135,16 +135,16 @@ try:
             exec("num = num" + opr + "2")
         elif mode == "gay":                                                         # Its not like others... so do read...
             time.sleep(0.0625)
-            n = 4
-            cbn = cbn + 1
+            n = 4                                                                   # The foreground and background charscter is fixed to the 5th one (ik it says 4, but indexing works differently)
+            cbn = cbn + 1                                                           # Moves up the color list... here, bcolor
             if cbn == (len(bcolor) - 1):
-                cbn = 0
+                cbn = 0                                                             # If the color list (bcolor) has ended, then revert back to the start of the list... and ik it says 0, but again, indexing works differently
             cfn = cfn + 1
             if cfn == (len(fcolor) - 1):
                 cfn = 0
             btxtm = btxt[n]
             ftxtm = ftxt[n]
-            bcolorm = bcolor[cbn]
+            bcolorm = bcolor[cbn]                                                   # Ik that this line, and the line after this, in the other 3 modes was put in an if condition that would execute if it was running in a tty... but if it had the if condition, the colors would go away... and the colors in this mode is what makes it different...
             fcolorm = fcolor[cfn]
             num = cols
 except KeyboardInterrupt:                                                           # Executes when Ctrl+C is pressed at anytime
