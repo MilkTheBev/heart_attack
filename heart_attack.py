@@ -25,7 +25,7 @@ elif cols % 2 != 0:
 num = num2
 btxt = ["·", "=", "-", "0", "░"]                                                    # Character list that will print as background
 ftxt = ["•", "#", "—", "1", "▓"]                                                    # Character list that will print as foreground
-btxtm = "*"                                                                         # A character selected from btxt, right now an empty string
+btxtm = " "                                                                         # A character selected from btxt, right now an empty string
 ftxtm = "*"                                                                         # A character selected from ftxt, right now an empty string
 bcolor = [
         "\033[31m", # Red
