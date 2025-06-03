@@ -61,7 +61,7 @@ modes = [
         "ascending",    # The first one i coded... increases the number of foreground characters until it reaches the maximum width it can, from which it begins to shrink... when it fully shrinks, a new pattern begins.
         "random",       # aka. chaos... everything is randomized after each line.... time interval, random... colors, random... characters, random...
         "descending",   # Just like the first one, but reversed... may take time....
-        "gay",          # ik a bit offensive.... im sorry... it basically outputs a rainbow... each line colored differently... Oh yeah and this does not have a colorless version because it cant. So if you're sensitive to flashing lights please don't choose this....
+        "gay",          # ik a bit offensive.... im sorry... it basically outputs a rainbow... each line colored differently...
         "file"          # A nice one, it outputs the text in a text file over and over again with colors and shit...
 ]
 
@@ -147,12 +147,8 @@ try:
                 opr = " - "
                 btxtm = btxt[n]
                 ftxtm = ftxt[n]
-                if ttymode:
-                    bcolorm = bcolor[cbn]
-                    fcolorm = fcolor[cfn]
-                elif not ttymode:
-                    bcolorm = ""
-                    fcolorm = ""
+                bcolorm = bcolor[cbn]
+                fcolorm = fcolor[cfn]
             exec("num = num" + opr + "2")
         elif mode == 3:                                                                 # Gay mode... its not like others... so do read...
             time.sleep(0.0625)
@@ -176,12 +172,8 @@ try:
                 cfn = random.randint(0, (len(fcolor) - 1))
             btxtm = btxt[n]
             ftxtm = flins[ln].replace("\n", "")                                         # Takes the current line (ln) and replaces the '\n' escape character (newline or line feed) with nothing
-            if ttymode:
-                bcolorm = bcolor[cbn]
-                fcolorm = fcolor[cfn]
-            elif not ttymode:
-                bcolorm = ""
-                fcolorm = ""
+            bcolorm = bcolor[cbn]
+            fcolorm = fcolor[cfn]
             ln = ln + 1
             if ln == len(flins):
                 ln = 0                                                                  # If the last line has been reached, reset back to 0
