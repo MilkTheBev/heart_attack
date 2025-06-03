@@ -75,7 +75,7 @@ elif not ttymode:
     mode = 0
 
 if mode == 4:
-    file = input("Enter '.txt' file path (has to be full path, also avoid using characters like '\\', use '/' instead as backslashes are treated as escape characters, you dont need to know what an escape character is just enter the goddamn path)\n> ") # For the 5th mode (ik it says 4, but indexing works differently), a text file will need to be provided...
+    file = input("Enter '.txt' file path (avoid using characters like '\\', use '/' instead as backslashes are treated as escape characters)\nCurrent working directory: " + os.getcwd() + "\n> ") # For the 5th mode (ik it says 4, but indexing works differently), a text file will need to be provided...
     with open(file, "rt") as f:
         flins = f.readlines()
     f.close()                                                                           # Does some quick line storing and then closes so that it neither bothers you or the file
