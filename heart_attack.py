@@ -147,8 +147,12 @@ try:
                 opr = " - "
                 btxtm = btxt[n]
                 ftxtm = ftxt[n]
-                bcolorm = bcolor[cbn]
-                fcolorm = fcolor[cfn]
+                if ttymode:
+                    bcolorm = bcolor[cbn]
+                    fcolorm = fcolor[cfn]
+                elif not ttymode:
+                    bcolorm = ""
+                    fcolorm = ""
             exec("num = num" + opr + "2")
         elif mode == 3:                                                                 # Gay mode... its not like others... so do read...
             time.sleep(0.0625)
@@ -172,8 +176,12 @@ try:
                 cfn = random.randint(0, (len(fcolor) - 1))
             btxtm = btxt[n]
             ftxtm = flins[ln].replace("\n", "")                                         # Takes the current line (ln) and replaces the '\n' escape character (newline or line feed) with nothing
-            bcolorm = bcolor[cbn]
-            fcolorm = fcolor[cfn]
+            if ttymode:
+                bcolorm = bcolor[cbn]
+                fcolorm = fcolor[cfn]
+            elif not ttymode:
+                bcolorm = ""
+                fcolorm = ""
             ln = ln + 1
             if ln == len(flins):
                 ln = 0                                                                  # If the last line has been reached, reset back to 0
