@@ -39,3 +39,7 @@ you wont be able to save the output as a txt file.. cuz youre running it as a po
 
 ### 4. `gay` mode
 ![Preview](gifs/gay.gif)
+
+### 5. `file` mode
+![Preview](gifs/file.gif)
+Outputs the contents of a `.txt` file after customizing it and centering it. And the cycle repeats
