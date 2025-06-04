@@ -28,8 +28,8 @@ if cols % 2 == 0:
 elif cols % 2 != 0:
     num2 = 1
 num = num2
-btxt = ["·", "=", "-", "0", "░"]                                                    # Character list that will print as background
-ftxt = ["•", "#", "—", "1", "▓"]                                                    # Character list that will print as foreground
+btxt = ["·", "=", "-", "0", "░", " "]                                               # Character list that will print as background
+ftxt = ["•", "#", "—", "1", "▓", "*"]                                               # Character list that will print as foreground
 btxtm = " "                                                                         # A character selected from btxt, right now an empty string
 ftxtm = "*"                                                                         # A character selected from ftxt, right now an empty string
 bcolor = [
