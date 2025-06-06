@@ -118,7 +118,7 @@ try:
                     fcolorm = ""
             exec("num = num" + opr + "2")                                               # Controls the number of forground characters, further controlled by the operator variable opr
         elif mode == 1:
-            time.sleep(random.randint(0, 1000) / 1000)                                  # Waits for a random interval between 0 and half a second
+            time.sleep(random.randint(0, 1000) / 10000)                                 # Waits for a random interval between 0 and half a second
             n = random.randint(0, (len(btxt) - 1))
             cbn = random.randint(0, (len(bcolor) - 1))
             cfn = random.randint(0, (len(fcolor) - 1))
