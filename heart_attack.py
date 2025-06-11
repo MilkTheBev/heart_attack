@@ -158,10 +158,10 @@ try:
                 cbn = random.randint(0, (len(bcolor) - 1))
                 cfn = random.randint(0, (len(fcolor) - 1))
                 opr = " - "
-                btxtm = btxt[n]
-                ftxtm = ftxt[n]
-                bcolorm = bcolor[cbn]
-                fcolorm = fcolor[cfn]
+                btxtm = ftxt[n]
+                ftxtm = btxt[n]
+                bcolorm = fcolor[cbn]
+                fcolorm = bcolor[cfn]
             exec("num = num" + opr + "2")
         elif mode == 3:                                                             # Gay mode... its not like others... so do read...
             time.sleep(0.0625)
