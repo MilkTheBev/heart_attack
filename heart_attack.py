@@ -20,7 +20,7 @@
 #   A nice little tty screensaver made in python                                              #
 #                                                                                             #
 ###############################################################################################
-import os, time, random, sys
+import os, time, random, sys, argparse
 
 def clearscr():
     if os.name == "nt":
@@ -78,23 +78,29 @@ modes = [
         "file"          # A nice one, it outputs the text in a text file over and over again with colors and shit...
 ]
 
-# ^^ The different modes in which it can output ^^
+parser = argparse.ArgumentParser(description="heart_attack.py")                     # Added argument parsing.. LESGOOOOOOOO!!!! say goodbye to having to input the mode all the time.
+parser.add_argument("mode", choices = ["1", "2", "3", "4", "5"], help = "1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file") # The mode argument set up...
+parser.add_argument("--file", type = str, help = "The file required for 'file' mode.") # An optional argument required for file mode, which is the text file its gonna read and make colorful.
+parser.add_argument("--ttymode", choices = ["0", "1"], help = "Optional argument if you want this script to think its not running in a tty even though it automatically checks whether it is running in a tty. Its recommended to set '--ttymode False' for photosensitive people.") # No explanation needed, the help section does the job.
+args = parser.parse_args()                                                          # Tells argparse to parse the arguments and realise they exist, which you don't.
 
-for i in range(0, len(modes)):
-    print(str(i + 1) + ". " + modes[i])
-if ttymode:
-    mode = int(input("Choose mode (for example, type '1' for 'ascending' mode): ")) - 1 # Prompts the user to choose the mode... and this wont loop. So run the script again to switch mode
-elif not ttymode:
-    mode = 0
+mode = int(args.mode) - 1
 
-if mode == 4:
-    file = input("Enter '.txt' file path (avoid using characters like '\\', use '/' instead as backslashes are treated as escape characters)\nCurrent working directory: " + os.getcwd() + "\n> ") # For the 5th mode (ik it says 4, but indexing works differently), a text file will need to be provided...
-    with open(file, "rt") as f:
+if args.ttymode:
+    ttymode = bool(int(args.ttymode))
+    if not ttymode and mode != 0:
+        mode = 0
+
+if mode == 4 and args.file:
+    with open(args.file, "rt") as f:
         flins = f.readlines()
     f.close()                                                                       # Does some quick line storing and then closes so that it neither bothers you or the file
     ln = 0                                                                          # ln here is not natural log, but rather the line index of the list of lines created and stored in flins
     num = 1                                                                         # Oh yeah and num is locked to 1 cuz you do not wanna see one line twice. Do you?
-    t = float(input("Set time interval (in seconds, can be decimal too): "))        # For extra sexiness you choose the time interval between each line in this mode.
+    t = float(input("Set time interval (in seconds, can be decimal too): "))        # For extra sexiness you choose the time interval between each line in this mode, ik you still have to input time but am i here to keep on making arguments? No.
+elif mode == 4 and not args.file:
+    print("Uhh... im clueless rn so like can you run the script again and make sure to use the '--file' argument if choosing 'file' mode?")
+    exit()
 
 clearscr()
 

@@ -6,15 +6,21 @@ The reason its called `heart_attack.py` is because if you run it in fullscreen i
 
 also this is the very first script i properly commented...
 
-**IMPORTANT**: If you are sensitive to flashing lights. Either refrain from using this, or go to line 17 and set the `ttymode` variable to `False`.
+**IMPORTANT**: If you are sensitive to flashing lights. Either refrain from using this, or set the '--ttymode' argument to 0, it will default to ascending mode.
 
 If you have any suggestions, feel free to tell me. Or if you wanna make it better or wilder, fork it... I'm not stopping you.
 
 ## Usage
 If running normally, you can just type this in your terminal
 ```bash
-python3 heart_attack.py
+python3 heart_attack.py [MODE - 1, 2, 3, 4, 5] --file [FILE - if mode is 5] --ttymode [TTYMODE - 0, 1]
 ```
+[MODE] here can be either
+1 - ascending
+2 - random
+3 - descending
+4 - gay
+5 - file (with this mode, the '--file' argument is required to be filled)
 Press `Ctrl+C` to exit. From here, you can choose to save the last 1000 lines to a file called `output.txt` or not.
 
 But if running as a polybar module, open your polybar config and paste the following
