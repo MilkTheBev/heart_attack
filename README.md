@@ -13,14 +13,16 @@ If you have any suggestions, feel free to tell me. Or if you wanna make it bette
 ## Usage
 If running normally, you can just type this in your terminal
 ```bash
-python3 heart_attack.py [MODE - 1, 2, 3, 4, 5] --file [FILE - if mode is 5] --ttymode [TTYMODE - 0, 1]
+python3 heart_attack.py [MODE - 0, 1, 2, 3, 4, 5] --file [FILE - if mode is 5]
 ```
 [MODE] here can be either
-1 - ascending
-2 - random
-3 - descending
-4 - gay
-5 - file (with this mode, the '--file' argument is required to be filled)
+0. - Non-tty
+1. - ascending
+2. - random
+3. - descending
+4. - gay
+5. - file (with this mode, the '--file' argument is required to be filled)
+
 Press `Ctrl+C` to exit. From here, you can choose to save the last 1000 lines to a file called `output.txt` or not.
 
 But if running as a polybar module, open your polybar config and paste the following
