@@ -79,17 +79,14 @@ modes = [
 ]
 
 parser = argparse.ArgumentParser(description="heart_attack.py")                     # Added argument parsing.. LESGOOOOOOOO!!!! say goodbye to having to input the mode all the time.
-parser.add_argument("mode", choices = ["1", "2", "3", "4", "5"], help = "1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file") # The mode argument set up...
+parser.add_argument("mode", choices = ["0", "1", "2", "3", "4", "5"], help = "0 - Non-tty (for environments that are not tty's, ttymode becomes False), 1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file") # The mode argument set up...
 parser.add_argument("--file", type = str, help = "The file required for 'file' mode.") # An optional argument required for file mode, which is the text file its gonna read and make colorful.
-parser.add_argument("--ttymode", choices = ["0", "1"], help = "Optional argument if you want this script to think its not running in a tty even though it automatically checks whether it is running in a tty. Its recommended to set '--ttymode False' for photosensitive people.") # No explanation needed, the help section does the job.
 args = parser.parse_args()                                                          # Tells argparse to parse the arguments and realise they exist, which you don't.
 
 mode = int(args.mode) - 1
-
-if args.ttymode:
-    ttymode = bool(int(args.ttymode))
-    if not ttymode and mode != 0:
-        mode = 0
+if mode == -1:
+    ttymode = False
+    mode = 0
 
 if mode == 4 and args.file:
     with open(args.file, "rt") as f:
