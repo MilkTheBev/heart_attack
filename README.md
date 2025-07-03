@@ -16,6 +16,7 @@ If running normally, you can just type this in your terminal
 python3 heart_attack.py [MODE - 0, 1, 2, 3, 4, 5] --file [FILE - if mode is 5]
 ```
 [MODE] here can be either
+
 0. - Non-tty
 1. - ascending
 2. - random
