@@ -17,7 +17,7 @@ python3 heart_attack.py [MODE - 0, 1, 2, 3, 4, 5] --file [FILE - if mode is 5]
 ```
 [MODE] here can be either
 
-0. - Non-tty
+0. - Non-tty (basically ascending mode but without any colors or interacrion with user at all. Best for polybar and epileptic people)
 1. - ascending
 2. - random
 3. - descending
@@ -30,7 +30,7 @@ But if running as a polybar module, open your polybar config and paste the follo
 ```ini
 [module/heart_attack] 'replace heart_attack with anything.
 type = custom/script
-exec = /path/to/where/you/cloned/heart_attack.py
+exec = /bin/python3 /path/to/where/you/cloned/heart_attack.py 0
 tail = true
 ```
 
