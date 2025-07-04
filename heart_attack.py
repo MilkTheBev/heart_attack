@@ -20,7 +20,7 @@
 #   A nice little tty screensaver made in python                                              #
 #                                                                                             #
 ###############################################################################################
-import os, time, random, sys, argparse
+import os, time, random, argparse
 
 def clearscr():
     if os.name == "nt":
@@ -30,17 +30,6 @@ def clearscr():
 
 x = True                                                                            # Will be used for looping
 opr = " + "
-if sys.stdout.isatty():
-    cols = os.get_terminal_size().columns                                           # Defines the number of columns
-    ttymode = True                                                                  # If you are sensitive to flashing images, please set this flag to False... it disables color... and defaults to 'ascending' mode
-else:
-    cols = 80                                                                       # If not a tty, 80 is assumed to be the number of columns
-    ttymode = False
-if cols % 2 == 0:
-    num2 = 2
-elif cols % 2 != 0:
-    num2 = 1
-num = num2
 btxt = ["·", "=", "-", "0", "░"]                                                    # Character list that will print as background
 ftxt = ["•", "#", "—", "1", "▓"]                                                    # Character list that will print as foreground
 btxtm = " "                                                                         # A character selected from btxt, right now an empty string
@@ -87,6 +76,16 @@ mode = int(args.mode) - 1
 if mode == -1:
     ttymode = False
     mode = 0
+
+if ttymode:
+    cols = os.get_terminal_size().columns                                           # Defines the number of columns
+else:
+    cols = 80                                                                       # If not a tty, 80 is assumed to be the number of columns
+if cols % 2 == 0:
+    num2 = 2
+elif cols % 2 != 0:
+    num2 = 1
+num = num2
 
 if mode == 4 and args.file:
     with open(args.file, "rt") as f:
