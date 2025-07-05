@@ -76,6 +76,8 @@ mode = int(args.mode) - 1
 if mode == -1:
     ttymode = False
     mode = 0
+else:
+    ttymode = True
 
 if ttymode:
     cols = os.get_terminal_size().columns                                           # Defines the number of columns
