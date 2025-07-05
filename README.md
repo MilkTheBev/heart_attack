@@ -39,20 +39,20 @@ you wont be able to save the output as a txt file.. cuz you're running it as a p
 
 ## Modes
 ### 1. `ascending` mode
-![Preview](gifs/ascending.gif)
+![Preview](pngs/ascending.png)
 
 ### 2. `random` mode
-![Preview](gifs/random.gif)
+![Preview](pngs/random.png)
 
 ### 3. `descending` mode
-![Preview](gifs/descending.gif)
+![Preview](pngs/descending.png)
 
 ### 4. `gay` mode
-![Preview](gifs/gay.gif)
+![Preview](pngs/gay.png)
 
 ### 5. `file` mode
-![Preview](gifs/file.gif)
+![Preview](pngs/file.png)
 Outputs the contents of a `.txt` file after customizing it and centering it. And the cycle repeats
 
 ### 6. `zigzag` mode
-![Preview](gifs/file.gif)
+![Preview](pngs/file.png)
