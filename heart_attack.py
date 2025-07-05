@@ -64,11 +64,12 @@ modes = [
         "random",       # aka. chaos... everything is randomized after each line.... time interval, random... colors, random... characters, random...
         "descending",   # Just like the first one, but reversed... may take time....
         "gay",          # ik a bit offensive.... im sorry... it basically outputs a rainbow... each line colored differently...
-        "file"          # A nice one, it outputs the text in a text file over and over again with colors and shit...
+        "file",         # A nice one, it outputs the text in a text file over and over again with colors and shit...
+        "zigzag"        # Unique as the number of foreground characters dont change, the center of those foreground characters does.
 ]
 
 parser = argparse.ArgumentParser(description="heart_attack.py")                     # Added argument parsing.. LESGOOOOOOOO!!!! say goodbye to having to input the mode all the time.
-parser.add_argument("mode", choices = ["0", "1", "2", "3", "4", "5"], help = "0 - Non-tty (for environments that are not tty's, ttymode becomes False), 1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file") # The mode argument set up...
+parser.add_argument("mode", choices = ["0", "1", "2", "3", "4", "5", "6"], help = "0 - Non-tty (for environments that are not tty's, ttymode becomes False), 1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file, 6 - zigzag") # The mode argument set up...
 parser.add_argument("--file", type = str, help = "The file required for 'file' mode.") # An optional argument required for file mode, which is the text file its gonna read and make colorful.
 args = parser.parse_args()                                                          # Tells argparse to parse the arguments and realise they exist, which you don't.
 
@@ -100,6 +101,9 @@ elif mode == 4 and not args.file:
     print("Uhh... im clueless rn so like can you run the script again and make sure to use the '--file' argument if choosing 'file' mode?")
     exit()
 
+if mode == 5:
+    rem = 0                                                                         # rem here is the count for gap, or the multiplier for gap...
+
 clearscr()
 
 try:
@@ -108,8 +112,11 @@ try:
         time.sleep(1)
     while x:
         lin = ftxtm * num                                                           # Multiplies the selected foreground character with the number...
-        gap = btxtm * ((cols - len(lin)) // 2)                                      # Centers lin and fills the extra space with the background character
-        gap2 = gap + (btxtm * (cols - len(gap + lin + gap)))                        # If any space still remains, fills it up with the background character
+        if mode != 5:
+            gap = btxtm * ((cols - len(lin)) // 2)                                  # Centers lin and fills the extra space with the background character IF the mode isnt zigzag
+        elif mode == 5:
+            gap = btxtm * rem                                                       # Now what if it was zigzag, you may ask, well this... Here the gap is what we HAVE to change, not what GETS changed by the mode. Now how will we change it? Read and find out...
+        gap2 = btxtm * (cols - len(gap + lin))                                      # If any space still remains, fills it up with the background character
         if ftxtm == "*":
             endchar = "\r"
         else:
@@ -194,6 +201,28 @@ try:
             ln = ln + 1
             if ln == len(flins):
                 ln = 0                                                              # If the last line has been reached, reset back to 0
+        elif mode == 5:                                                             # Zigzag mode, the hardest mode i have ever worked on...
+            time.sleep(0.0625)
+            num = cols // 4                                                         # This doesnt change, unlike in other modes. Its constant... Also this is how we will change gap.
+            if rem == 0:
+                n = random.randint(0, (len(btxt) - 1))
+                cbn = random.randint(0, (len(bcolor) - 1))
+                cfn = random.randint(0, (len(fcolor) - 1))
+                opr = " + "
+                btxtm = btxt[n]
+                ftxtm = ftxt[n]
+                bcolorm = bcolor[n]
+                fcolorm = fcolor[n]
+            elif rem == cols - num:
+                n = random.randint(0, (len(btxt) - 1))
+                cbn = random.randint(0, (len(bcolor) - 1))
+                cfn = random.randint(0, (len(fcolor) - 1))
+                opr = " - "
+                btxtm = btxt[n]
+                ftxtm = ftxt[n]
+                bcolorm = bcolor[n]
+                fcolorm = fcolor[n]
+            exec("rem = rem" + opr + "1")                                           # Basically used the addition with operator toggling logic type shit in this mode, just changed the afftected variable. Its now rem instead of num as like i *rem*'d before (pun intended), num stays constant.
 except KeyboardInterrupt:                                                           # Executes when Ctrl+C is pressed at anytime
     if ttymode:
         print("\033[0m")
