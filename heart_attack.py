@@ -124,7 +124,7 @@ try:
         print(bcolorm + gap + fcolorm + lin + bcolorm + gap2, end = endchar)        # Prints the output and colors as necessary
         lins.append(gap + lin + gap2)
         if mode == 0:
-            if not ttymode:
+            if ttymode:
                 time.sleep(0.0625)                                                      # Waits 1/16th of a second if its a tty, if it isnt it just slows down by a lot. I underestimate non tty engironments.
             else:
                 time.sleep(0.25)
