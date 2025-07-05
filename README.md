@@ -55,4 +55,4 @@ you wont be able to save the output as a txt file.. cuz you're running it as a p
 Outputs the contents of a `.txt` file after customizing it and centering it. And the cycle repeats
 
 ### 6. `zigzag` mode
-![Preview](pngs/file.png)
+![Preview](pngs/zigzag.png)
