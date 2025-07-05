@@ -22,7 +22,8 @@ python3 heart_attack.py [MODE - 0, 1, 2, 3, 4, 5] --file [FILE - if mode is 5]
 2. - random
 3. - descending
 4. - gay
-5. - file (with this mode, the '--file' argument is required to be filled)
+5. - file (with this mode, the '--file' argument is required)
+6. - zigzag
 
 Press `Ctrl+C` to exit. From here, you can choose to save the last 1000 lines to a file called `output.txt` or not.
 
@@ -34,7 +35,7 @@ exec = /bin/python3 /path/to/where/you/cloned/heart_attack.py 0
 tail = true
 ```
 
-you wont be able to save the output as a txt file.. cuz youre running it as a polybar module
+you wont be able to save the output as a txt file.. cuz you're running it as a polybar module
 
 ## Modes
 ### 1. `ascending` mode
@@ -52,3 +53,6 @@ you wont be able to save the output as a txt file.. cuz youre running it as a po
 ### 5. `file` mode
 ![Preview](gifs/file.gif)
 Outputs the contents of a `.txt` file after customizing it and centering it. And the cycle repeats
+
+### 6. `zigzag` mode
+![Preview](gifs/file.gif)
