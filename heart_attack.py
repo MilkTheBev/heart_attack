@@ -214,8 +214,8 @@ try:
                 opr = " + "
                 btxtm = btxt[n]
                 ftxtm = ftxt[n]
-                bcolorm = bcolor[n]
-                fcolorm = fcolor[n]
+                bcolorm = bcolor[cbn]
+                fcolorm = fcolor[cfn]
             elif rem == cols - num:
                 n = random.randint(0, (len(btxt) - 1))
                 cbn = random.randint(0, (len(bcolor) - 1))
@@ -223,8 +223,8 @@ try:
                 opr = " - "
                 btxtm = btxt[n]
                 ftxtm = ftxt[n]
-                bcolorm = bcolor[n]
-                fcolorm = fcolor[n]
+                bcolorm = bcolor[cbn]
+                fcolorm = fcolor[cfn]
             exec("rem = rem" + opr + "1")                                           # Basically used the addition with operator toggling logic type shit in this mode, just changed the afftected variable. Its now rem instead of num as like i *rem*'d before (pun intended), num stays constant.
 except KeyboardInterrupt:                                                           # Executes when Ctrl+C is pressed at anytime
     if ttymode:
