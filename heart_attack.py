@@ -71,7 +71,7 @@ modes = [
 parser = argparse.ArgumentParser(description="heart_attack.py")                     # Added argument parsing.. LESGOOOOOOOO!!!! say goodbye to having to input the mode all the time.
 parser.add_argument("mode", choices = ["0", "1", "2", "3", "4", "5", "6"], help = "0 - Non-tty (for environments that are not tty's, ttymode becomes False), 1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file, 6 - zigzag") # The mode argument set up...
 parser.add_argument("--file", type = str, help = "The file required for 'file' mode.") # An optional argument required for file mode, which is the text file its gonna read and make colorful.
-args = parser.parse_args()                                                          # Tells argparse to parse the arguments and realise they exist, which you don't.
+args = parser.parse_args()                                                          # Tells argparse to parse the arguments and realize they exist, which you don't.
 
 mode = int(args.mode) - 1
 if mode == -1:
@@ -81,14 +81,17 @@ else:
     ttymode = True
 
 if ttymode:
-    cols = os.get_terminal_size().columns                                           # Defines the number of columns
+    cols = os.get_terminal_size().columns                                           # Finds the number of columns
+    rows = os.get_terminal_size().lines                                             # Similarly, finds the number of rows.
 else:
     cols = 80                                                                       # If not a tty, 80 is assumed to be the number of columns
+    rows = 24                                                                       # And 24 as the number of rows. This may seem as if it isnt needed, but trust me. it is.
 if cols % 2 == 0:
-    num2 = 2
+    num2 = 2                                                                        # If the number of columns is an even number, then the minimum number of foreground characters is 2
 elif cols % 2 != 0:
-    num2 = 1
-num = num2
+    num2 = 1                                                                        # Similarly, if the number of columns is an odd number, then the minimum number of foreground characters is 1.
+num = num2                                                                          # num here is the current number of foreground characters. num2 remains constant while num changes (except mode 6).
+t = 15 / (10 * rows)                                                                # Divides 15 by 10 times the number of rows to get the time it should sleep for...
 
 if mode == 4 and args.file:
     with open(args.file, "rt") as f:
@@ -104,7 +107,8 @@ elif mode == 4 and not args.file:
 if mode == 5:
     rem = 0                                                                         # rem here is the count for gap, or the multiplier for gap...
 
-clearscr()
+if ttymode:
+    clearscr()
 
 try:
     if ttymode:
@@ -124,7 +128,7 @@ try:
         print(bcolorm + gap + fcolorm + lin + bcolorm + gap2, end = endchar)        # Prints the output and colors as necessary
         lins.append(gap + lin + gap2)
         if mode == 0:
-            time.sleep(0.0625)                                                      # Waits 1/16th of a second
+            time.sleep(t)                                                           # Waits t seconds
             if num == cols:
                 opr = " - "                                                         # If the number of foreground characters is the same as the number of columns, operation becomes subtraction
             elif num == num2:
@@ -161,7 +165,7 @@ try:
                     while num % 2 != 0:
                         num = random.randint(num2, cols)
         elif mode == 2:                                                             # Descending mode... no explanation needed... just like the first mode, but reversed...
-            time.sleep(0.0625)
+            time.sleep(t)
             if num == num2:
                 opr = " + "
             elif num == cols:
@@ -175,7 +179,7 @@ try:
                 fcolorm = bcolor[cfn]
             exec("num = num" + opr + "2")
         elif mode == 3:                                                             # Gay mode... its not like others... so do read...
-            time.sleep(0.0625)
+            time.sleep(t)
             n = 4                                                                   # The foreground and background character is fixed to the 5th one as it truly resembles the pride flag (ik it says 4, but indexing works differently)
             if cbn == 0 and cfn == 0:
                 opr = " + "
@@ -202,7 +206,7 @@ try:
             if ln == len(flins):
                 ln = 0                                                              # If the last line has been reached, reset back to 0
         elif mode == 5:                                                             # Zigzag mode, the hardest mode i have ever worked on...
-            time.sleep(0.0625)
+            time.sleep(t)
             num = cols // 4                                                         # This doesnt change, unlike in other modes. Its constant... Also this is how we will change gap.
             if rem == 0:
                 n = random.randint(0, (len(btxt) - 1))
