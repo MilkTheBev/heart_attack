@@ -91,7 +91,7 @@ if cols % 2 == 0:
 elif cols % 2 != 0:
     num2 = 1                                                                        # Similarly, if the number of columns is an odd number, then the minimum number of foreground characters is 1.
 num = num2                                                                          # num here is the current number of foreground characters. num2 remains constant while num changes (except mode 6).
-t = 15 / (10 * rows)                                                                # Divides 15 by 10 times the number of rows to get the time it should sleep for...
+t = 5 / cols                                                                        # Divides 5 by cols to get the time it should sleep for...
 
 if mode == 4 and args.file:
     with open(args.file, "rt") as f:
