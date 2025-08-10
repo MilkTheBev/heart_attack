@@ -82,10 +82,8 @@ else:
 
 if ttymode:
     cols = os.get_terminal_size().columns                                           # Finds the number of columns
-    rows = os.get_terminal_size().lines                                             # Similarly, finds the number of rows.
 else:
     cols = 80                                                                       # If not a tty, 80 is assumed to be the number of columns
-    rows = 24                                                                       # And 24 as the number of rows. This may seem as if it isnt needed, but trust me. it is.
 if cols % 2 == 0:
     num2 = 2                                                                        # If the number of columns is an even number, then the minimum number of foreground characters is 2
 elif cols % 2 != 0:
