@@ -59,17 +59,9 @@ bcolorm = ""                                                                    
 fcolorm = ""                                                                        # Foreground color selected from fcolor, right now empty, will remain empty if ttymode == False
 
 lins = []                                                                           # Will store the lines the program prints without color...
-modes = [
-        "ascending",    # The first one i coded... increases the number of foreground characters until it reaches the maximum width it can, from which it begins to shrink... when it fully shrinks, a new pattern begins.
-        "random",       # aka. chaos... everything is randomized after each line.... time interval, random... colors, random... characters, random...
-        "descending",   # Just like the first one, but reversed... may take time....
-        "gay",          # ik a bit offensive.... im sorry... it basically outputs a rainbow... each line colored differently...
-        "file",         # A nice one, it outputs the text in a text file over and over again with colors and shit...
-        "zigzag"        # Unique as the number of foreground characters dont change, the center of those foreground characters does.
-]
 
 parser = argparse.ArgumentParser(description="heart_attack.py")                     # Added argument parsing.. LESGOOOOOOOO!!!! say goodbye to having to input the mode all the time.
-parser.add_argument("mode", choices = ["0", "1", "2", "3", "4", "5", "6"], help = "0 - Non-tty (for environments that are not tty's, ttymode becomes False), 1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file, 6 - zigzag") # The mode argument set up...
+parser.add_argument("mode", choices = ["0", "1", "2", "3", "4", "5", "6", "7"], help = "0 - Non-tty (for environments that are not tty's, ttymode becomes False), 1 - ascending, 2 - random, 3 - descending, 4 - gay, 5 - file, 6 - zigzag, 7 - pager") # The mode argument set up...
 parser.add_argument("--file", type = str, help = "The file required for 'file' mode.") # An optional argument required for file mode, which is the text file its gonna read and make colorful.
 args = parser.parse_args()                                                          # Tells argparse to parse the arguments and realize they exist, which you don't.
 
@@ -82,8 +74,10 @@ else:
 
 if ttymode:
     cols = os.get_terminal_size().columns                                           # Finds the number of columns
+    rows = os.get_terminal_size().lines                                             # Finds the number of rows
 else:
-    cols = 80                                                                       # If not a tty, 80 is assumed to be the number of columns
+    cols = 80                                                                       # If not a tty, 80 are the number of columns
+    rows = 24                                                                       # And if not a tty, 24 are the number of rows
 if cols % 2 == 0:
     num2 = 2                                                                        # If the number of columns is an even number, then the minimum number of foreground characters is 2
 elif cols % 2 != 0:
@@ -104,6 +98,9 @@ elif mode == 4 and not args.file:
 
 if mode == 5:
     rem = 0                                                                         # rem here is the count for gap, or the multiplier for gap...
+
+if mode == 6:
+    lc = 0
 
 if ttymode:
     clearscr()
@@ -225,6 +222,20 @@ try:
                 bcolorm = bcolor[cbn]
                 fcolorm = fcolor[cfn]
             exec("rem = rem" + opr + "1")                                           # Basically used the addition with operator toggling logic type shit in this mode, just changed the afftected variable. Its now rem instead of num as like i *rem*'d before (pun intended), num stays constant.
+        elif mode == 6:
+            time.sleep(t)
+            n = 4
+            if lc == 0:
+                cbn = random.randint(0, (len(bcolor) - 1))
+                cfn = random.randint(0, (len(fcolor) - 1))
+            lc = lc + 1
+            if lc == rows + 1:
+                lc = 0
+            btxtm = btxt[n]
+            ftxtm = ftxt[n]
+            bcolorm = bcolor[cbn]
+            fcolorm = fcolor[cfn]
+            num = cols
 except KeyboardInterrupt:                                                           # Executes when Ctrl+C is pressed at anytime
     if ttymode:
         print("\033[0m")
